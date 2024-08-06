@@ -19,6 +19,7 @@ extension MainScreen {
         
         public init() {
             print(#function, self)
+            saveOnboardingState()
         }
         
         deinit {
@@ -26,6 +27,10 @@ extension MainScreen {
         }
         
         // MARK: - Methods
+        
+        private func saveOnboardingState() {
+            UserDefaults.standard.setValue(true, forKey: UserDefKeys.shared.isUserOnboarded)
+        }
         
         // MARK: - Actions
         

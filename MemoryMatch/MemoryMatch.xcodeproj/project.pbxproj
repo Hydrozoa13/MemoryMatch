@@ -23,6 +23,15 @@
 		D16A1EB72C62717E003F3812 /* GameScreen+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EB62C62717E003F3812 /* GameScreen+Presenter.swift */; };
 		D16A1EB92C627187003F3812 /* GameScreen+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EB82C627187003F3812 /* GameScreen+View.swift */; };
 		D16A1EBB2C62718F003F3812 /* GameScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EBA2C62718F003F3812 /* GameScreenView.swift */; };
+		D16A1EBE2C627855003F3812 /* NotificationsScreen+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EBD2C627855003F3812 /* NotificationsScreen+Presenter.swift */; };
+		D16A1EC02C627860003F3812 /* NotificationsScreen+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EBF2C627860003F3812 /* NotificationsScreen+View.swift */; };
+		D16A1EC22C627866003F3812 /* NotificationsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EC12C627866003F3812 /* NotificationsScreenView.swift */; };
+		D16A1EC52C627A23003F3812 /* UserDefKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EC42C627A23003F3812 /* UserDefKeys.swift */; };
+		D16A1EC82C627EB9003F3812 /* UIFontExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EC72C627EB9003F3812 /* UIFontExt.swift */; };
+		D16A1ECA2C627EF2003F3812 /* inter.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D16A1EC92C627EF2003F3812 /* inter.ttf */; };
+		D16A1ECC2C6280A8003F3812 /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1ECB2C6280A8003F3812 /* UILabelExt.swift */; };
+		D16A1ECE2C6280E2003F3812 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1ECD2C6280E2003F3812 /* StringExt.swift */; };
+		D16A1ED62C628576003F3812 /* interRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D16A1ED52C628576003F3812 /* interRegular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +53,15 @@
 		D16A1EB62C62717E003F3812 /* GameScreen+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScreen+Presenter.swift"; sourceTree = "<group>"; };
 		D16A1EB82C627187003F3812 /* GameScreen+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScreen+View.swift"; sourceTree = "<group>"; };
 		D16A1EBA2C62718F003F3812 /* GameScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreenView.swift; sourceTree = "<group>"; };
+		D16A1EBD2C627855003F3812 /* NotificationsScreen+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationsScreen+Presenter.swift"; sourceTree = "<group>"; };
+		D16A1EBF2C627860003F3812 /* NotificationsScreen+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationsScreen+View.swift"; sourceTree = "<group>"; };
+		D16A1EC12C627866003F3812 /* NotificationsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsScreenView.swift; sourceTree = "<group>"; };
+		D16A1EC42C627A23003F3812 /* UserDefKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefKeys.swift; sourceTree = "<group>"; };
+		D16A1EC72C627EB9003F3812 /* UIFontExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExt.swift; sourceTree = "<group>"; };
+		D16A1EC92C627EF2003F3812 /* inter.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = inter.ttf; sourceTree = "<group>"; };
+		D16A1ECB2C6280A8003F3812 /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
+		D16A1ECD2C6280E2003F3812 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
+		D16A1ED52C628576003F3812 /* interRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = interRegular.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +113,7 @@
 		D14C24512C61F4CC002672D6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D16A1EC62C627E8E003F3812 /* Fonts */,
 				D14C24452C61F3E2002672D6 /* Assets.xcassets */,
 				D14C24472C61F3E2002672D6 /* LaunchScreen.storyboard */,
 				D14C244A2C61F3E2002672D6 /* Info.plist */,
@@ -106,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				D14C24602C61F734002672D6 /* Root */,
+				D16A1EBC2C627834003F3812 /* NotificationsScreen */,
 				D14C24532C61F58D002672D6 /* LoadingScreen */,
 				D16A1EAE2C6269B9003F3812 /* MainScreen */,
 				D16A1EB52C62716D003F3812 /* GameScreen */,
@@ -126,6 +146,7 @@
 		D14C245A2C61F605002672D6 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D16A1EC32C627A12003F3812 /* UserDefKeys */,
 				D14C245B2C61F60B002672D6 /* Extensions */,
 			);
 			path = Common;
@@ -136,6 +157,9 @@
 			children = (
 				D14C245C2C61F631002672D6 /* UIViewControllerExt.swift */,
 				D14C245E2C61F69F002672D6 /* UIViewExt.swift */,
+				D16A1EC72C627EB9003F3812 /* UIFontExt.swift */,
+				D16A1ECB2C6280A8003F3812 /* UILabelExt.swift */,
+				D16A1ECD2C6280E2003F3812 /* StringExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -167,6 +191,33 @@
 				D16A1EBA2C62718F003F3812 /* GameScreenView.swift */,
 			);
 			path = GameScreen;
+			sourceTree = "<group>";
+		};
+		D16A1EBC2C627834003F3812 /* NotificationsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D16A1EBD2C627855003F3812 /* NotificationsScreen+Presenter.swift */,
+				D16A1EBF2C627860003F3812 /* NotificationsScreen+View.swift */,
+				D16A1EC12C627866003F3812 /* NotificationsScreenView.swift */,
+			);
+			path = NotificationsScreen;
+			sourceTree = "<group>";
+		};
+		D16A1EC32C627A12003F3812 /* UserDefKeys */ = {
+			isa = PBXGroup;
+			children = (
+				D16A1EC42C627A23003F3812 /* UserDefKeys.swift */,
+			);
+			path = UserDefKeys;
+			sourceTree = "<group>";
+		};
+		D16A1EC62C627E8E003F3812 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D16A1EC92C627EF2003F3812 /* inter.ttf */,
+				D16A1ED52C628576003F3812 /* interRegular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,7 +279,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D14C24462C61F3E2002672D6 /* Assets.xcassets in Resources */,
+				D16A1ECA2C627EF2003F3812 /* inter.ttf in Resources */,
 				D14C24492C61F3E2002672D6 /* Base in Resources */,
+				D16A1ED62C628576003F3812 /* interRegular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,17 +294,24 @@
 			files = (
 				D14C24642C61F762002672D6 /* NavigationBarRoot+Presenter.swift in Sources */,
 				D16A1EB92C627187003F3812 /* GameScreen+View.swift in Sources */,
+				D16A1ECC2C6280A8003F3812 /* UILabelExt.swift in Sources */,
 				D16A1EBB2C62718F003F3812 /* GameScreenView.swift in Sources */,
 				D14C245F2C61F69F002672D6 /* UIViewExt.swift in Sources */,
 				D14C245D2C61F631002672D6 /* UIViewControllerExt.swift in Sources */,
 				D16A1EB02C6269D1003F3812 /* MainScreen+Presenter.swift in Sources */,
 				D14C243D2C61F3E0002672D6 /* AppDelegate.swift in Sources */,
 				D16A1EB22C6269DA003F3812 /* MainScreen+View.swift in Sources */,
+				D16A1EC52C627A23003F3812 /* UserDefKeys.swift in Sources */,
+				D16A1ECE2C6280E2003F3812 /* StringExt.swift in Sources */,
+				D16A1EC82C627EB9003F3812 /* UIFontExt.swift in Sources */,
 				D14C24552C61F5A5002672D6 /* LoadingScreen+Presenter.swift in Sources */,
+				D16A1EC02C627860003F3812 /* NotificationsScreen+View.swift in Sources */,
+				D16A1EBE2C627855003F3812 /* NotificationsScreen+Presenter.swift in Sources */,
 				D16A1EB42C6269E0003F3812 /* MainScreenView.swift in Sources */,
 				D14C24622C61F744002672D6 /* NavigationBarRoot.swift in Sources */,
 				D14C24572C61F5AE002672D6 /* LoadingScreen+View.swift in Sources */,
 				D16A1EB72C62717E003F3812 /* GameScreen+Presenter.swift in Sources */,
+				D16A1EC22C627866003F3812 /* NotificationsScreenView.swift in Sources */,
 				D14C24592C61F5B5002672D6 /* LoadingScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

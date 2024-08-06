@@ -17,9 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        let rootView = NavigationBarRoot.View(with: .init(rootView: LoadingScreen.View.init(with: .init())))
+        let rootView = UserDefaults.standard.bool(forKey: UserDefKeys.shared.isUserOnboarded)
+        ? LoadingScreen.View(with: .init())
+        : NotificationsScreen.View(with: .init())
         
-        window?.rootViewController = rootView
+        let rootViewController = NavigationBarRoot.View(with: .init(rootView: rootView))
+        
+        window?.rootViewController = rootViewController
         return true
     }
 }
