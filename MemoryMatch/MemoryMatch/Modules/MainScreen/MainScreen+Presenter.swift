@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SafariServices
 
 extension MainScreen {
     class Presenter {
@@ -28,6 +29,18 @@ extension MainScreen {
         
         // MARK: - Actions
         
+        func navigateToGameScreen() {
+            view?.navigate(to: GameScreen.View.init(with: .init()))
+        }
         
+        func showSafariPage() {
+            if let url = URL(string: "https://odd-confidence-d37.notion.site/Test-Task-Memory-match-573a43577867462da17660d1eba8f774") {
+                let configuration = SFSafariViewController.Configuration()
+                configuration.entersReaderIfAvailable = true
+
+                let viewController = SFSafariViewController(url: url, configuration: configuration)
+                view?.navigationController?.present(viewController, animated: true)
+            }
+        }
     }
 }
