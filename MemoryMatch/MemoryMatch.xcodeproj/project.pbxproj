@@ -36,6 +36,7 @@
 		D16A1EDB2C63AAE8003F3812 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EDA2C63AAE8003F3812 /* CollectionViewCell.swift */; };
 		D16A1EE22C64A703003F3812 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EE12C64A703003F3812 /* Settings.swift */; };
 		D16A1EE52C64AEA3003F3812 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EE42C64AEA3003F3812 /* Button.swift */; };
+		D16A1EE82C6538CE003F3812 /* WinnerPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EE72C6538CE003F3812 /* WinnerPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		D16A1EDA2C63AAE8003F3812 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		D16A1EE12C64A703003F3812 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D16A1EE42C64AEA3003F3812 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		D16A1EE72C6538CE003F3812 /* WinnerPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 				D16A1EBA2C62718F003F3812 /* GameScreenView.swift */,
 				D16A1ED72C63AA8D003F3812 /* CollectionView */,
 				D16A1EE02C64A6EC003F3812 /* Settings */,
+				D16A1EE62C65387F003F3812 /* WinnerPage */,
 			);
 			path = GameScreen;
 			sourceTree = "<group>";
@@ -254,6 +257,14 @@
 				D16A1EE42C64AEA3003F3812 /* Button.swift */,
 			);
 			path = CommonViews;
+			sourceTree = "<group>";
+		};
+		D16A1EE62C65387F003F3812 /* WinnerPage */ = {
+			isa = PBXGroup;
+			children = (
+				D16A1EE72C6538CE003F3812 /* WinnerPage.swift */,
+			);
+			path = WinnerPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +342,7 @@
 				D14C24642C61F762002672D6 /* NavigationBarRoot+Presenter.swift in Sources */,
 				D16A1EB92C627187003F3812 /* GameScreen+View.swift in Sources */,
 				D16A1ECC2C6280A8003F3812 /* UILabelExt.swift in Sources */,
+				D16A1EE82C6538CE003F3812 /* WinnerPage.swift in Sources */,
 				D16A1EBB2C62718F003F3812 /* GameScreenView.swift in Sources */,
 				D14C245F2C61F69F002672D6 /* UIViewExt.swift in Sources */,
 				D14C245D2C61F631002672D6 /* UIViewControllerExt.swift in Sources */,

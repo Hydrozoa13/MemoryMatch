@@ -16,10 +16,12 @@ extension GameScreen {
         
         var firstIndexPath: IndexPath?
         var movesCounter = 0
+        var pairsCount = 0
         
         var timer = Timer()
         var timerCount = 0
         var timerCounting = true
+        var time = ""
         
         // MARK: - Initializers
         
@@ -45,7 +47,8 @@ extension GameScreen {
         @objc func timerCounter() -> Void {
             timerCount += 1
             let timeString = formatTimeToString(seconds: timerCount)
-            view?.updateTimeLabel(time: timeString)
+            time = timeString
+            view?.updateTimeLabel()
         }
         
         // MARK: - Actions

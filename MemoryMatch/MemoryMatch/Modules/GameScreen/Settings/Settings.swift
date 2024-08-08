@@ -54,7 +54,7 @@ final class Settings: UIView {
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self else { return }
             self.layer.opacity = 1
-            self.overlay.layer.opacity = 0.5
+            self.overlay.layer.opacity = 0.7
         }
     }
     

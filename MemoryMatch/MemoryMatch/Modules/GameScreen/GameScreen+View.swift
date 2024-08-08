@@ -53,6 +53,7 @@ extension GameScreen {
             super.viewDidLoad()
             setup()
             setupSlots()
+            showWinnerPage()
         }
         
         // MARK: - Private functions
@@ -71,8 +72,8 @@ extension GameScreen {
             slots = randomSlots.shuffled()
         }
         
-        private func showAlert() {
-            let customAlert = Settings { [weak self] in
+        private func showSettings() {
+            let settingsMenu = Settings { [weak self] in
                 guard let self else { return }
                 self.presenter.toggleTimer()
             } dismissAction: { [weak self] in
@@ -83,7 +84,12 @@ extension GameScreen {
                 self.pop(animated: true)
             }
             
-            customAlert.show(in: self.view)
+            settingsMenu.show(in: self.view)
+        }
+        
+        private func showWinnerPage() {
+            let winnerPage = WinnerPage(count: presenter.movesCounter, time: presenter.time)
+            winnerPage.show(in: self.view)
         }
         
         // MARK: - Methods
@@ -127,7 +133,7 @@ extension GameScreen {
             settingsBtn.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
                 presenter.toggleTimer()
-                showAlert()
+                showSettings()
             }), for: .touchUpInside)
             
             pauseBtn.addAction(UIAction(handler: { [weak self] _ in
@@ -184,19 +190,14 @@ extension GameScreen {
     }
 }
 
-//#Preview {
-//    let vc = GameScreen.View.init(with: .init())
-//    return vc
-//}
-
 
 // MARK: - Extension View
 
 extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectionViewDataSource,
                            UICollectionViewDelegateFlowLayout {
     
-    func updateTimeLabel(time: String) {
-        timeLabel.text = "TIME: " + time
+    func updateTimeLabel() {
+        timeLabel.text = "TIME: " + presenter.time
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
@@ -249,11 +250,14 @@ extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectio
             }
             
             if let firstImage = slots[firstIndexPath.item], firstImage == currentImage {
+                presenter.pairsCount += 1
                 presenter.firstIndexPath = nil
             } else {
                 collectionView.isUserInteractionEnabled = false
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
+                    guard let self else { return }
+                    
                     if let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell {
                         cell.changeCurtainState(isOpening: false)
                     }
@@ -272,5 +276,11 @@ extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectio
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell else { return }
         cell.changeCurtainState()
+        
+        if presenter.pairsCount == slots.count / 2 {
+            collectionView.isUserInteractionEnabled = false
+            presenter.toggleTimer()
+            showWinnerPage()
+        }
     }
 }
