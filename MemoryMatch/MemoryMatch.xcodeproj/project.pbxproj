@@ -32,6 +32,10 @@
 		D16A1ECC2C6280A8003F3812 /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1ECB2C6280A8003F3812 /* UILabelExt.swift */; };
 		D16A1ECE2C6280E2003F3812 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1ECD2C6280E2003F3812 /* StringExt.swift */; };
 		D16A1ED62C628576003F3812 /* interRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D16A1ED52C628576003F3812 /* interRegular.ttf */; };
+		D16A1ED92C63AA9F003F3812 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1ED82C63AA9F003F3812 /* CollectionView.swift */; };
+		D16A1EDB2C63AAE8003F3812 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EDA2C63AAE8003F3812 /* CollectionViewCell.swift */; };
+		D16A1EE22C64A703003F3812 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EE12C64A703003F3812 /* Settings.swift */; };
+		D16A1EE52C64AEA3003F3812 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EE42C64AEA3003F3812 /* Button.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +66,10 @@
 		D16A1ECB2C6280A8003F3812 /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
 		D16A1ECD2C6280E2003F3812 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		D16A1ED52C628576003F3812 /* interRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = interRegular.ttf; sourceTree = "<group>"; };
+		D16A1ED82C63AA9F003F3812 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
+		D16A1EDA2C63AAE8003F3812 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		D16A1EE12C64A703003F3812 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		D16A1EE42C64AEA3003F3812 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +154,7 @@
 		D14C245A2C61F605002672D6 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D16A1EE32C64AE93003F3812 /* CommonViews */,
 				D16A1EC32C627A12003F3812 /* UserDefKeys */,
 				D14C245B2C61F60B002672D6 /* Extensions */,
 			);
@@ -189,6 +198,8 @@
 				D16A1EB62C62717E003F3812 /* GameScreen+Presenter.swift */,
 				D16A1EB82C627187003F3812 /* GameScreen+View.swift */,
 				D16A1EBA2C62718F003F3812 /* GameScreenView.swift */,
+				D16A1ED72C63AA8D003F3812 /* CollectionView */,
+				D16A1EE02C64A6EC003F3812 /* Settings */,
 			);
 			path = GameScreen;
 			sourceTree = "<group>";
@@ -218,6 +229,31 @@
 				D16A1ED52C628576003F3812 /* interRegular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		D16A1ED72C63AA8D003F3812 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				D16A1ED82C63AA9F003F3812 /* CollectionView.swift */,
+				D16A1EDA2C63AAE8003F3812 /* CollectionViewCell.swift */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		D16A1EE02C64A6EC003F3812 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D16A1EE12C64A703003F3812 /* Settings.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		D16A1EE32C64AE93003F3812 /* CommonViews */ = {
+			isa = PBXGroup;
+			children = (
+				D16A1EE42C64AEA3003F3812 /* Button.swift */,
+			);
+			path = CommonViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,6 +334,7 @@
 				D16A1EBB2C62718F003F3812 /* GameScreenView.swift in Sources */,
 				D14C245F2C61F69F002672D6 /* UIViewExt.swift in Sources */,
 				D14C245D2C61F631002672D6 /* UIViewControllerExt.swift in Sources */,
+				D16A1EDB2C63AAE8003F3812 /* CollectionViewCell.swift in Sources */,
 				D16A1EB02C6269D1003F3812 /* MainScreen+Presenter.swift in Sources */,
 				D14C243D2C61F3E0002672D6 /* AppDelegate.swift in Sources */,
 				D16A1EB22C6269DA003F3812 /* MainScreen+View.swift in Sources */,
@@ -306,12 +343,15 @@
 				D16A1EC82C627EB9003F3812 /* UIFontExt.swift in Sources */,
 				D14C24552C61F5A5002672D6 /* LoadingScreen+Presenter.swift in Sources */,
 				D16A1EC02C627860003F3812 /* NotificationsScreen+View.swift in Sources */,
+				D16A1EE52C64AEA3003F3812 /* Button.swift in Sources */,
 				D16A1EBE2C627855003F3812 /* NotificationsScreen+Presenter.swift in Sources */,
 				D16A1EB42C6269E0003F3812 /* MainScreenView.swift in Sources */,
 				D14C24622C61F744002672D6 /* NavigationBarRoot.swift in Sources */,
+				D16A1EE22C64A703003F3812 /* Settings.swift in Sources */,
 				D14C24572C61F5AE002672D6 /* LoadingScreen+View.swift in Sources */,
 				D16A1EB72C62717E003F3812 /* GameScreen+Presenter.swift in Sources */,
 				D16A1EC22C627866003F3812 /* NotificationsScreenView.swift in Sources */,
+				D16A1ED92C63AA9F003F3812 /* CollectionView.swift in Sources */,
 				D14C24592C61F5B5002672D6 /* LoadingScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

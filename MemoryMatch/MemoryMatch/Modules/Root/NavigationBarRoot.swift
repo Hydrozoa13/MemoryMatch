@@ -31,8 +31,9 @@ struct NavigationBarRoot {
         
         override func viewDidLoad() {
             super.viewDidLoad()
-            self.delegate = self
-            self.navigationBar.tintColor = .clear
+            delegate = self
+            navigationBar.tintColor = .clear
+            setNavigationBarHidden(true, animated: false)
         }
         
         // MARK: - Methods
@@ -43,7 +44,7 @@ struct NavigationBarRoot {
             CATransaction.setCompletionBlock(completion)
             super.pushViewController(viewController, animated: animated)
             CATransaction.commit()
-            self.interactivePopGestureRecognizer?.isEnabled = true
+            interactivePopGestureRecognizer?.isEnabled = true
         }
     }
 }

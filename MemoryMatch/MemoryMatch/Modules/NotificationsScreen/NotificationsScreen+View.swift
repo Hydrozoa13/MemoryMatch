@@ -30,7 +30,7 @@ extension NotificationsScreen {
         
         // MARK: - Initializers
         
-        public init(with presenter: Presenter) {
+        init(with presenter: Presenter) {
             self.presenter = presenter
             super.init(nibName: nil, bundle: nil)
             
@@ -41,17 +41,11 @@ extension NotificationsScreen {
             fatalError("init(coder:) has not been implemented")
         }
         
-        deinit { }
-        
         // MARK: - Lifecycle
         
         public override func viewDidLoad() {
             super.viewDidLoad()
             setup()
-        }
-        
-        public override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
         }
         
         // MARK: - Methods

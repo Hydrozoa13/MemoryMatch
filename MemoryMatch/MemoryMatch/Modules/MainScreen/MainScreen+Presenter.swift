@@ -17,14 +17,12 @@ extension MainScreen {
         
         // MARK: - Initializers
         
-        public init() {
+        init() {
             print(#function, self)
             saveOnboardingState()
         }
         
-        deinit {
-            print(#function, self)
-        }
+        deinit { print(#function, self) }
         
         // MARK: - Methods
         

@@ -26,12 +26,12 @@ extension MainScreen {
         private let lemon = UIImageView(image: .lemon)
         private let orange = UIImageView(image: .orange)
         private let menuIcon = UIImageView(image: .menuIcon)
-        private let playNowBtn = UIButton()
-        private let privacyPolicyBtn = UIButton()
+        private let playNowBtn = Button(title: "PLAY NOW")
+        private let privacyPolicyBtn = Button(title: "PRIVACY POLICY")
         
         // MARK: - Initializers
         
-        public init(with presenter: Presenter) {
+        init(with presenter: Presenter) {
             self.presenter = presenter
             super.init(nibName: nil, bundle: nil)
             
@@ -42,17 +42,11 @@ extension MainScreen {
             fatalError("init(coder:) has not been implemented")
         }
         
-        deinit { }
-        
         // MARK: - Lifecycle
         
-        public override func viewDidLoad() {
+        override func viewDidLoad() {
             super.viewDidLoad()
             setup()
-        }
-        
-        public override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
         }
         
         // MARK: - Methods
@@ -80,20 +74,21 @@ extension MainScreen {
         
         private func configureSubviews() {
             background.isUserInteractionEnabled = true
-            
-            playNowBtn.setImage(.playNowBtn, for: .normal)
-            privacyPolicyBtn.setImage(.privacyPolicyBtn, for: .normal)
         }
         
         private func setupActions() {
             playNowBtn.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                presenter.navigateToGameScreen()
+                playNowBtn.animatePressing {
+                    self.presenter.navigateToGameScreen()
+                }
             }), for: .touchUpInside)
             
             privacyPolicyBtn.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                presenter.showSafariPage()
+                privacyPolicyBtn.animatePressing {
+                    self.presenter.showSafariPage()
+                }
             }), for: .touchUpInside)
         }
         

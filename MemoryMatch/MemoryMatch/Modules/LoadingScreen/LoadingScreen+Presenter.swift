@@ -16,13 +16,8 @@ extension LoadingScreen {
         
         // MARK: - Initializers
         
-        public init() {
-            print(#function, self)
-        }
-        
-        deinit {
-            print(#function, self)
-        }
+        init() { print(#function, self) }
+        deinit { print(#function, self) }
         
         // MARK: - Methods
         

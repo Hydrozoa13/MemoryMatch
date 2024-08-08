@@ -29,7 +29,7 @@ extension LoadingScreen {
         
         // MARK: - Initializers
         
-        public init(with presenter: Presenter) {
+        init(with presenter: Presenter) {
             self.presenter = presenter
             super.init(nibName: nil, bundle: nil)
             
@@ -40,20 +40,12 @@ extension LoadingScreen {
             fatalError("init(coder:) has not been implemented")
         }
         
-        deinit {
-            print(#function, self)
-        }
-        
         // MARK: - Lifecycle
         
-        public override func viewDidLoad() {
+        override func viewDidLoad() {
             super.viewDidLoad()
             setup()
             presenter.navigateToMainScreen()
-        }
-        
-        public override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
         }
         
         // MARK: - Methods
