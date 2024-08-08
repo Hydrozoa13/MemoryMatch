@@ -11,6 +11,7 @@ final class Settings: UIView {
     
     // MARK: - Properties
     
+    private var resumeActionTapped: (() -> Void)?
     private var dismissActionTapped: (() -> Void)?
     
     // MARK: - Subviews
@@ -26,7 +27,8 @@ final class Settings: UIView {
     
     // MARK: - Initializers
     
-    init(dismissAction: (() -> Void)? = nil) {
+    init(resumeAction: (() -> Void)? = nil, dismissAction: (() -> Void)? = nil) {
+        self.resumeActionTapped = resumeAction
         self.dismissActionTapped = dismissAction
         super.init(frame: .zero)
         setup()
@@ -67,6 +69,7 @@ final class Settings: UIView {
             guard let self else { return }
             self.removeFromSuperview()
             self.overlay.removeFromSuperview()
+            self.resumeActionTapped?()
             
             if isDismission {
                 self.dismissActionTapped?()

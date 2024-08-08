@@ -14,15 +14,51 @@ extension GameScreen {
         
         weak var view: GameScreenView?
         
+        var firstIndexPath: IndexPath?
+        var movesCounter = 0
+        
+        var timer = Timer()
+        var timerCount = 0
+        var timerCounting = true
+        
         // MARK: - Initializers
         
-        init() { print(#function, self) }
+        init() {
+            print(#function, self)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self,
+                                         selector: #selector(timerCounter), userInfo: nil, repeats: true)
+        }
+        
         deinit { print(#function, self) }
         
         // MARK: - Methods
         
+        private func formatTimeToString(seconds: Int) -> String {
+            let (min, sec) = (((seconds % 3600) / 60), ((seconds % 3600) % 60))
+            var timeString = ""
+            timeString += String(format: "%02d", min)
+            timeString += ":"
+            timeString += String(format: "%02d", sec)
+            return timeString
+        }
+        
+        @objc func timerCounter() -> Void {
+            timerCount += 1
+            let timeString = formatTimeToString(seconds: timerCount)
+            view?.updateTimeLabel(time: timeString)
+        }
+        
         // MARK: - Actions
         
-        
+        func toggleTimer() {
+            if timerCounting {
+                timer.invalidate()
+            } else {
+                timer = Timer.scheduledTimer(timeInterval: 1, target: self,
+                                             selector: #selector(timerCounter), userInfo: nil, repeats: true)
+            }
+            
+            timerCounting.toggle()
+        }
     }
 }

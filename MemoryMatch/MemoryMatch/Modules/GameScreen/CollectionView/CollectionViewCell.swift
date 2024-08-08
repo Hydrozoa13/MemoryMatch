@@ -18,6 +18,8 @@ final class CollectionViewCell: UICollectionViewCell {
     // MARK: - Subviews
     
     private let backView = UIImageView(image: .cellView)
+    private let slotView = UIImageView()
+    private let slotCurtain = UIImageView(image: .slotCurtain)
     
     // MARK: - Initializers
     
@@ -32,6 +34,16 @@ final class CollectionViewCell: UICollectionViewCell {
     
     // MARK: - Functions
     
+    func setupCell(with image: UIImage) {
+        slotView.image = image
+    }
+    
+    func changeCurtainState(isOpening: Bool = true) {
+        UIView.animate(withDuration: 0.5) {
+            self.slotCurtain.layer.opacity = isOpening ? 0 : 1
+        }
+    }
+    
     // MARK: - Private functions
     
     // MARK: - Methods
@@ -44,6 +56,8 @@ final class CollectionViewCell: UICollectionViewCell {
     
     private func buildHierarchy() {
         addView(backView)
+        backView.addView(slotView)
+        backView.addView(slotCurtain)
     }
     
     private func configureSubviews() {
@@ -56,6 +70,16 @@ final class CollectionViewCell: UICollectionViewCell {
             backView.leadingAnchor.constraint(equalTo: leadingAnchor),
             backView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            slotView.widthAnchor.constraint(equalTo: backView.widthAnchor, multiplier: 0.75),
+            slotView.heightAnchor.constraint(equalTo: slotView.widthAnchor, multiplier: 0.95),
+            slotView.centerXAnchor.constraint(equalTo: backView.centerXAnchor),
+            slotView.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
+            
+            slotCurtain.widthAnchor.constraint(equalTo: slotView.widthAnchor),
+            slotCurtain.heightAnchor.constraint(equalTo: slotView.heightAnchor),
+            slotCurtain.centerXAnchor.constraint(equalTo: backView.centerXAnchor),
+            slotCurtain.centerYAnchor.constraint(equalTo: backView.centerYAnchor)
         ])
     }
 }

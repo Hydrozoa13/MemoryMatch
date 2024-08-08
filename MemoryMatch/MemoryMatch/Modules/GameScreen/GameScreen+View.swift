@@ -17,6 +17,7 @@ extension GameScreen {
         
         private var cellWidth: CGFloat = 0
         private var cellHeight: CGFloat = 0
+        private var slots = [UIImage?]()
         
         // MARK: - Subviews
         
@@ -51,12 +52,31 @@ extension GameScreen {
         override func viewDidLoad() {
             super.viewDidLoad()
             setup()
+            setupSlots()
         }
         
         // MARK: - Private functions
         
+        private func setupSlots() {
+            let slotNames = ["slot0", "slot1", "slot2", "slot3", "slot4", "slot5", "slot6", "slot7"]
+            
+            var randomSlots = [UIImage]()
+            
+            for slotName in slotNames.prefix(upTo: slotNames.count) {
+                if let image = UIImage(named: slotName) {
+                    randomSlots.append(contentsOf: Array(repeating: image, count: 2))
+                }
+            }
+            
+            slots = randomSlots.shuffled()
+        }
+        
         private func showAlert() {
-            let customAlert = Settings {
+            let customAlert = Settings { [weak self] in
+                guard let self else { return }
+                self.presenter.toggleTimer()
+            } dismissAction: { [weak self] in
+                guard let self else { return }
                 UIView.animate(withDuration: 0.3) {
                     self.view.layer.opacity = 0
                 }
@@ -92,11 +112,12 @@ extension GameScreen {
             
             settingsBtn.setImage(.settings, for: .normal)
             pauseBtn.setImage(.pause, for: .normal)
+            pauseBtn.setImage(.playBtn, for: .selected)
             cancelBtn.setImage(.cancel, for: .normal)
             restartBtn.setImage(.restart, for: .normal)
             
-            movesLabel.configure(text: "MOVIES:", font: .inter(of: 20), lineHeight: 24)
-            timeLabel.configure(text: "TIME:", font: .inter(of: 20), lineHeight: 24)
+            movesLabel.configure(text: "MOVIES: 0", font: .inter(of: 20), lineHeight: 24)
+            timeLabel.configure(text: "TIME: 00:00", font: .inter(of: 20), lineHeight: 24)
             
             collection.delegate = self
             collection.dataSource = self
@@ -105,7 +126,14 @@ extension GameScreen {
         private func setupActions() {
             settingsBtn.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
+                presenter.toggleTimer()
                 showAlert()
+            }), for: .touchUpInside)
+            
+            pauseBtn.addAction(UIAction(handler: { [weak self] _ in
+                guard let self else { return }
+                presenter.toggleTimer()
+                pauseBtn.isSelected.toggle()
             }), for: .touchUpInside)
         }
         
@@ -133,13 +161,13 @@ extension GameScreen {
                 settingsBtn.leadingAnchor.constraint(equalTo: counterView.leadingAnchor, constant: 6),
                 
                 collection.widthAnchor.constraint(equalTo: view.widthAnchor),
-                collection.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.65),
+                collection.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
                 collection.centerXAnchor.constraint(equalTo: background.centerXAnchor),
-                collection.topAnchor.constraint(equalTo: counterView.bottomAnchor, constant: 32),
+                collection.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 20),
                 
                 pauseBtn.widthAnchor.constraint(equalTo: settingsBtn.widthAnchor),
                 pauseBtn.heightAnchor.constraint(equalTo: pauseBtn.widthAnchor),
-                pauseBtn.topAnchor.constraint(equalTo: collection.bottomAnchor, constant: -20),
+                pauseBtn.topAnchor.constraint(equalTo: collection.bottomAnchor, constant: 60),
                 pauseBtn.leadingAnchor.constraint(equalTo: counterView.leadingAnchor),
                 
                 cancelBtn.widthAnchor.constraint(equalTo: pauseBtn.widthAnchor),
@@ -167,6 +195,10 @@ extension GameScreen {
 extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectionViewDataSource,
                            UICollectionViewDelegateFlowLayout {
     
+    func updateTimeLabel(time: String) {
+        timeLabel.text = "TIME: " + time
+    }
+    
     // MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
@@ -188,13 +220,57 @@ extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectio
     
     // MARK: - UICollectionViewDataSource
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { 20 }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { slots.count }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier,
                                                        for: indexPath) as? CollectionViewCell
         else { fatalError("The collectionView could not dequeue a CollectionViewCell") }
         
+        cell.setupCell(with: slots[indexPath.row]!)
+        
         return cell
+    }
+    
+    // MARK: - UICollectionViewDelegate
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if indexPath != presenter.firstIndexPath {
+            presenter.movesCounter += 1
+            movesLabel.text = "MOVIES: " + "\(presenter.movesCounter)"
+        }
+        
+        guard let currentImage = slots[indexPath.item] else { return }
+        
+        if let firstIndexPath = presenter.firstIndexPath {
+            if firstIndexPath == indexPath {
+                return
+            }
+            
+            if let firstImage = slots[firstIndexPath.item], firstImage == currentImage {
+                presenter.firstIndexPath = nil
+            } else {
+                collectionView.isUserInteractionEnabled = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    if let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell {
+                        cell.changeCurtainState(isOpening: false)
+                    }
+                    
+                    if let firstCell = collectionView.cellForItem(at: firstIndexPath) as? CollectionViewCell {
+                        firstCell.changeCurtainState(isOpening: false)
+                    }
+                    
+                    self.presenter.firstIndexPath = nil
+                    collectionView.isUserInteractionEnabled = true
+                }
+            }
+        } else {
+            presenter.firstIndexPath = indexPath
+        }
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell else { return }
+        cell.changeCurtainState()
     }
 }

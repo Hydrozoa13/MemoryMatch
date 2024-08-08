@@ -10,5 +10,5 @@ import UIKit
 struct GameScreen { }
 
 protocol GameScreenView: ViewDelegate {
-    
+    func updateTimeLabel(time: String)
 }
