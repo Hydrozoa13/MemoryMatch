@@ -128,6 +128,10 @@ extension GameScreen {
             movesLabel.text = "MOVIES: 0"
             timeLabel.text = "TIME: 00:00"
             
+            if pauseBtn.isSelected {
+                pauseBtn.isSelected.toggle()
+            }
+            
             presenter.reloadAllCounts()
         }
         
@@ -191,7 +195,10 @@ extension GameScreen {
             restartBtn.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
                 restartBtn.buttonPressed {
-                    self.presenter.toggleTimer()
+                    
+                    if self.presenter.timerCounting {
+                        self.presenter.toggleTimer()
+                    }
                     
                     UIView.animate(withDuration: 0.3) {
                         self.collection.alpha = 0
