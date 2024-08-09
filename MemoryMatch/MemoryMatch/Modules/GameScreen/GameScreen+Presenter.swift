@@ -20,7 +20,11 @@ extension GameScreen {
         
         var timer = Timer()
         var timerCount = 0
-        var timerCounting = true
+        var timerCounting = true {
+            didSet {
+                view?.changeCollectionState()
+            }
+        }
         var time = ""
         
         // MARK: - Initializers
@@ -62,6 +66,16 @@ extension GameScreen {
             }
             
             timerCounting.toggle()
+        }
+        
+        func reloadAllCounts() {
+            firstIndexPath = nil
+            movesCounter = 0
+            pairsCount = 0
+            timerCount = 0
+            timerCounting = false
+            time = ""
+            toggleTimer()
         }
     }
 }

@@ -11,4 +11,5 @@ struct GameScreen { }
 
 protocol GameScreenView: ViewDelegate {
     func updateTimeLabel()
+    func changeCollectionState()
 }

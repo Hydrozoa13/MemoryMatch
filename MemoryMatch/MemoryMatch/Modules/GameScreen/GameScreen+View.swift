@@ -53,7 +53,6 @@ extension GameScreen {
             super.viewDidLoad()
             setup()
             setupSlots()
-            showWinnerPage()
         }
         
         // MARK: - Private functions
@@ -75,7 +74,11 @@ extension GameScreen {
         private func showSettings() {
             let settingsMenu = Settings { [weak self] in
                 guard let self else { return }
-                self.presenter.toggleTimer()
+                
+                if !pauseBtn.isSelected {
+                    self.presenter.toggleTimer()
+                }
+                
             } dismissAction: { [weak self] in
                 guard let self else { return }
                 UIView.animate(withDuration: 0.3) {
@@ -88,8 +91,43 @@ extension GameScreen {
         }
         
         private func showWinnerPage() {
-            let winnerPage = WinnerPage(count: presenter.movesCounter, time: presenter.time)
+            let winnerPage = WinnerPage(count: presenter.movesCounter,
+                                        time: presenter.time) { [weak self] in
+                guard let self else { return }
+                
+                UIView.animate(withDuration: 0.3) {
+                    self.collection.alpha = 0
+                } completion: { _ in
+                    self.startNewGame()
+                    self.collection.alpha = 1
+                }
+
+            } dismissAction: { [weak self] in
+                guard let self else { return }
+                
+                UIView.animate(withDuration: 0.3) {
+                    self.view.layer.opacity = 0
+                }
+                self.pop(animated: true)
+            }
+
             winnerPage.show(in: self.view)
+        }
+        
+        private func startNewGame() {
+            slots.shuffle()
+            collection.visibleCells.forEach { cell in
+                guard let custedCell = cell as? CollectionViewCell else { return }
+                custedCell.changeCurtainState(isOpening: false)
+                custedCell.isUserInteractionEnabled = true
+            }
+            collection.reloadData()
+            collection.isUserInteractionEnabled = true
+            
+            movesLabel.text = "MOVIES: 0"
+            timeLabel.text = "TIME: 00:00"
+            
+            presenter.reloadAllCounts()
         }
         
         // MARK: - Methods
@@ -132,7 +170,9 @@ extension GameScreen {
         private func setupActions() {
             settingsBtn.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                presenter.toggleTimer()
+                if presenter.timerCounting {
+                    presenter.toggleTimer()
+                }
                 showSettings()
             }), for: .touchUpInside)
             
@@ -196,6 +236,10 @@ extension GameScreen {
 extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectionViewDataSource,
                            UICollectionViewDelegateFlowLayout {
     
+    func changeCollectionState() {
+        collection.isUserInteractionEnabled = presenter.timerCounting ? true : false
+    }
+    
     func updateTimeLabel() {
         timeLabel.text = "TIME: " + presenter.time
     }
@@ -251,6 +295,8 @@ extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectio
             
             if let firstImage = slots[firstIndexPath.item], firstImage == currentImage {
                 presenter.pairsCount += 1
+                collectionView.cellForItem(at: firstIndexPath)?.isUserInteractionEnabled = false
+                collectionView.cellForItem(at: indexPath)?.isUserInteractionEnabled = false
                 presenter.firstIndexPath = nil
             } else {
                 collectionView.isUserInteractionEnabled = false
@@ -278,7 +324,6 @@ extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectio
         cell.changeCurtainState()
         
         if presenter.pairsCount == slots.count / 2 {
-            collectionView.isUserInteractionEnabled = false
             presenter.toggleTimer()
             showWinnerPage()
         }

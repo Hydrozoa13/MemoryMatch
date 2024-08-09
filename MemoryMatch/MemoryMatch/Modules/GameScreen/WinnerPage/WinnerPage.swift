@@ -35,7 +35,6 @@ final class WinnerPage: UIView {
         self.dismissActionTapped = dismissAction
         self.count = count
         self.time = time
-        print(time)
         super.init(frame: .zero)
         setup()
     }
@@ -66,7 +65,7 @@ final class WinnerPage: UIView {
     
     // MARK: - Private Functions
     
-    private func removeSettingsView(isDismission: Bool = false) {
+    private func removeWinnerView(isDismission: Bool = false) {
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self else { return }
             self.layer.opacity = 0
@@ -75,10 +74,7 @@ final class WinnerPage: UIView {
             guard let self else { return }
             self.removeFromSuperview()
             self.overlay.removeFromSuperview()
-            
-            if isDismission {
-//                self.dismissActionTapped?()
-            }
+            isDismission ? self.dismissActionTapped?() : self.resumeActionTapped?()
         }
     }
     
@@ -117,6 +113,15 @@ final class WinnerPage: UIView {
     }
     
     private func setupActions() {
+        newGameBtn.addAction(UIAction(handler: { [weak self] _ in
+            guard let self else { return }
+            removeWinnerView()
+        }), for: .touchUpInside)
+        
+        menuBtn.addAction(UIAction(handler: { [weak self] _ in
+            guard let self else { return }
+            removeWinnerView(isDismission: true)
+        }), for: .touchUpInside)
     }
     
     private func setupLayoutSubviews() {
