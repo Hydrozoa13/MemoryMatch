@@ -183,12 +183,23 @@ extension GameScreen {
             
             cancelBtn.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                cancelBtn.buttonPressed {}
+                cancelBtn.buttonPressed {
+                    self.pop(animated: true)
+                }
             }), for: .touchUpInside)
             
             restartBtn.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                restartBtn.buttonPressed {}
+                restartBtn.buttonPressed {
+                    self.presenter.toggleTimer()
+                    
+                    UIView.animate(withDuration: 0.3) {
+                        self.collection.alpha = 0
+                    } completion: { _ in
+                        self.startNewGame()
+                        self.collection.alpha = 1
+                    }
+                }
             }), for: .touchUpInside)
         }
         
