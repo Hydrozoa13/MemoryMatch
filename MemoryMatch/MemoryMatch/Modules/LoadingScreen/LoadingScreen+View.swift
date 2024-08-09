@@ -48,6 +48,11 @@ extension LoadingScreen {
             presenter.navigateToMainScreen()
         }
         
+        override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            SoundManager.playSound(type: .coins)
+        }
+        
         // MARK: - Methods
         
         private func setup() {

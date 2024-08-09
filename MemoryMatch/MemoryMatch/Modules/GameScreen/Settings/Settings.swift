@@ -102,6 +102,7 @@ final class Settings: UIView {
         overlay.backgroundColor = .black
         clipsToBounds = true
         
+        soundBtn.isSelected = !SoundManager.isEnabled
         vibrationBtn.isSelected = !Vibration.isEnabled
     }
     
@@ -123,6 +124,7 @@ final class Settings: UIView {
         soundBtn.addAction(UIAction(handler: { [weak self] _ in
             guard let self else { return }
             soundBtn.buttonPressed {
+                SoundManager.isEnabled.toggle()
                 self.soundBtn.isSelected.toggle()
             }
         }), for: .touchUpInside)

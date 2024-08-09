@@ -305,6 +305,7 @@ extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectio
             
             if let firstImage = slots[firstIndexPath.item], firstImage == currentImage {
                 Vibration.vibrate(type: .success)
+                SoundManager.playSound(type: .pair)
                 presenter.pairsCount += 1
                 collectionView.cellForItem(at: firstIndexPath)?.isUserInteractionEnabled = false
                 collectionView.cellForItem(at: indexPath)?.isUserInteractionEnabled = false
@@ -312,6 +313,7 @@ extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectio
             } else {
                 collectionView.isUserInteractionEnabled = false
                 Vibration.vibrate(type: .error)
+                SoundManager.playSound(type: .notPair)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
                     guard let self else { return }
                     
@@ -336,6 +338,7 @@ extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectio
         
         if presenter.pairsCount == slots.count / 2 {
             Vibration.vibrate(type: .heavy)
+            SoundManager.playSound(type: .win)
             presenter.toggleTimer()
             showWinnerPage()
         }
