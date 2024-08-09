@@ -7,24 +7,32 @@
 
 import UIKit
 
+enum ButtonStyle {
+    case big
+    case small
+}
+
 final class Button: UIButton {
     
     // MARK: - Properties
     
-    private var title: String
+    private lazy var title = ""
     
     // MARK: - Subviews
     
-    private let background = UIImageView(image: .buttonBackground)
-    private let textLabel = UILabel()
+    private lazy var background = UIImageView(image: .buttonBackground)
+    private lazy var textLabel = UILabel()
     
     // MARK: - Initializers
     
-    init(title: String) {
-        self.title = title
-        super.init(frame: .zero)
+    init(style: ButtonStyle = .big, title: String = "",
+         normalImage: UIImage? = nil, selectedImage: UIImage? = nil) {
         
-        setup()
+        super.init(frame: .zero)
+        self.title = title
+        
+        style == .big ? setupBigButton() : setupSmallButton(normalImage: normalImage ?? nil,
+                                                            selectedImage: selectedImage ?? nil)
     }
     
     required init?(coder: NSCoder) {
@@ -33,7 +41,8 @@ final class Button: UIButton {
     
     // MARK: - Methods
     
-    func animatePressing(completion: @escaping () -> Void) {
+    func buttonPressed(completion: @escaping () -> Void) {
+        Vibration.vibrate(type: .light)
         UIView.animate(withDuration: 0.2) { [weak self] in
             guard let self else { return }
             self.layer.opacity = 0.5
@@ -41,22 +50,12 @@ final class Button: UIButton {
         } completion: { _ in completion() }
     }
     
-    private func setup() {
-        configureSubviews()
-        buildHierarchy()
-        setupLayoutSubviews()
-    }
-    
-    private func buildHierarchy() {
+    private func setupBigButton() {
         addView(background)
         background.addView(textLabel)
-    }
-    
-    private func configureSubviews() {
+        
         textLabel.configure(text: title, font: .inter(of: 20), lineHeight: 22)
-    }
-    
-    private func setupLayoutSubviews() {
+        
         NSLayoutConstraint.activate([
             background.topAnchor.constraint(equalTo: topAnchor),
             background.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -67,5 +66,9 @@ final class Button: UIButton {
             textLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
+    
+    private func setupSmallButton(normalImage: UIImage?, selectedImage: UIImage?) {
+        setImage(normalImage, for: .normal)
+        setImage(selectedImage, for: .selected)
+    }
 }
-

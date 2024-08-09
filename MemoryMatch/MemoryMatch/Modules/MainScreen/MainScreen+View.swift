@@ -79,14 +79,14 @@ extension MainScreen {
         private func setupActions() {
             playNowBtn.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                playNowBtn.animatePressing {
+                playNowBtn.buttonPressed {
                     self.presenter.navigateToGameScreen()
                 }
             }), for: .touchUpInside)
             
             privacyPolicyBtn.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                privacyPolicyBtn.animatePressing {
+                privacyPolicyBtn.buttonPressed {
                     self.presenter.showSafariPage()
                 }
             }), for: .touchUpInside)

@@ -25,8 +25,8 @@ final class WinnerPage: UIView {
     private let youWin = UIImageView(image: .youWin)
     private let movesLabel = UILabel()
     private let timeLabel = UILabel()
-    private let newGameBtn = UIButton()
-    private let menuBtn = UIButton()
+    private let newGameBtn = Button(style: .small, normalImage: .newGameBtn)
+    private let menuBtn = Button(style: .small, normalImage: .menuBtn)
     
     // MARK: - Initializers
     
@@ -107,20 +107,21 @@ final class WinnerPage: UIView {
         
         movesLabel.configure(text: "MOVIES: " + String(count), font: .inter(of: 20), lineHeight: 24)
         timeLabel.configure(text: "TIME: " + time, font: .inter(of: 20), lineHeight: 24)
-        
-        newGameBtn.setImage(.newGameBtn, for: .normal)
-        menuBtn.setImage(.menuBtn, for: .normal)
     }
     
     private func setupActions() {
         newGameBtn.addAction(UIAction(handler: { [weak self] _ in
             guard let self else { return }
-            removeWinnerView()
+            newGameBtn.buttonPressed {
+                self.removeWinnerView()
+            }
         }), for: .touchUpInside)
         
         menuBtn.addAction(UIAction(handler: { [weak self] _ in
             guard let self else { return }
-            removeWinnerView(isDismission: true)
+            menuBtn.buttonPressed {
+                self.removeWinnerView(isDismission: true)
+            }
         }), for: .touchUpInside)
     }
     

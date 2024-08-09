@@ -25,10 +25,10 @@ extension GameScreen {
         private let counterView = UIImageView(image: .counterBackview)
         private let movesLabel = UILabel()
         private let timeLabel = UILabel()
-        private let settingsBtn = UIButton()
-        private let pauseBtn = UIButton()
-        private let cancelBtn = UIButton()
-        private let restartBtn = UIButton()
+        private let settingsBtn = Button(style: .small, normalImage: .settings)
+        private let pauseBtn = Button(style: .small, normalImage: .pause, selectedImage: .playBtn)
+        private let cancelBtn = Button(style: .small, normalImage: .cancel)
+        private let restartBtn = Button(style: .small, normalImage: .restart)
         private let collection = CollectionView()
         
         // MARK: - Initializers
@@ -115,6 +115,7 @@ extension GameScreen {
         }
         
         private func startNewGame() {
+            Vibration.vibrate(type: .rigid)
             slots.shuffle()
             collection.visibleCells.forEach { cell in
                 guard let custedCell = cell as? CollectionViewCell else { return }
@@ -154,12 +155,6 @@ extension GameScreen {
         private func configureSubviews() {
             background.isUserInteractionEnabled = true
             
-            settingsBtn.setImage(.settings, for: .normal)
-            pauseBtn.setImage(.pause, for: .normal)
-            pauseBtn.setImage(.playBtn, for: .selected)
-            cancelBtn.setImage(.cancel, for: .normal)
-            restartBtn.setImage(.restart, for: .normal)
-            
             movesLabel.configure(text: "MOVIES: 0", font: .inter(of: 20), lineHeight: 24)
             timeLabel.configure(text: "TIME: 00:00", font: .inter(of: 20), lineHeight: 24)
             
@@ -170,16 +165,30 @@ extension GameScreen {
         private func setupActions() {
             settingsBtn.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                if presenter.timerCounting {
-                    presenter.toggleTimer()
+                settingsBtn.buttonPressed {
+                    if self.presenter.timerCounting {
+                        self.presenter.toggleTimer()
+                    }
+                    self.showSettings()
                 }
-                showSettings()
             }), for: .touchUpInside)
             
             pauseBtn.addAction(UIAction(handler: { [weak self] _ in
                 guard let self else { return }
-                presenter.toggleTimer()
-                pauseBtn.isSelected.toggle()
+                pauseBtn.buttonPressed {
+                    self.presenter.toggleTimer()
+                    self.pauseBtn.isSelected.toggle()
+                }
+            }), for: .touchUpInside)
+            
+            cancelBtn.addAction(UIAction(handler: { [weak self] _ in
+                guard let self else { return }
+                cancelBtn.buttonPressed {}
+            }), for: .touchUpInside)
+            
+            restartBtn.addAction(UIAction(handler: { [weak self] _ in
+                guard let self else { return }
+                restartBtn.buttonPressed {}
             }), for: .touchUpInside)
         }
         
@@ -282,6 +291,7 @@ extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if indexPath != presenter.firstIndexPath {
+            Vibration.vibrate(type: .selection)
             presenter.movesCounter += 1
             movesLabel.text = "MOVIES: " + "\(presenter.movesCounter)"
         }
@@ -294,13 +304,14 @@ extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectio
             }
             
             if let firstImage = slots[firstIndexPath.item], firstImage == currentImage {
+                Vibration.vibrate(type: .success)
                 presenter.pairsCount += 1
                 collectionView.cellForItem(at: firstIndexPath)?.isUserInteractionEnabled = false
                 collectionView.cellForItem(at: indexPath)?.isUserInteractionEnabled = false
                 presenter.firstIndexPath = nil
             } else {
                 collectionView.isUserInteractionEnabled = false
-                
+                Vibration.vibrate(type: .error)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
                     guard let self else { return }
                     
@@ -324,6 +335,7 @@ extension GameScreen.View: GameScreenView, UICollectionViewDelegate, UICollectio
         cell.changeCurtainState()
         
         if presenter.pairsCount == slots.count / 2 {
+            Vibration.vibrate(type: .heavy)
             presenter.toggleTimer()
             showWinnerPage()
         }

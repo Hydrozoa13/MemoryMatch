@@ -22,8 +22,8 @@ final class Settings: UIView {
     private let resumeBtn = Button(title: "RESUME")
     private let mainMenuBtn = Button(title: "MAIN MENU")
     
-    private let soundBtn = UIButton()
-    private let vibrationBtn = UIButton()
+    private let soundBtn = Button(style: .small, normalImage: .sound, selectedImage: .mutedSound)
+    private let vibrationBtn = Button(style: .small, normalImage: .vibration, selectedImage: .noVibration)
     
     // MARK: - Initializers
     
@@ -102,35 +102,37 @@ final class Settings: UIView {
         overlay.backgroundColor = .black
         clipsToBounds = true
         
-        soundBtn.setImage(.sound, for: .normal)
-        soundBtn.setImage(.mutedSound, for: .selected)
-        vibrationBtn.setImage(.vibration, for: .normal)
-        vibrationBtn.setImage(.noVibration, for: .selected)
+        vibrationBtn.isSelected = !Vibration.isEnabled
     }
     
     private func setupActions() {
         resumeBtn.addAction(UIAction(handler: { [weak self] _ in
             guard let self else { return }
-            resumeBtn.animatePressing {
+            resumeBtn.buttonPressed {
                 self.removeSettingsView()
             }
         }), for: .touchUpInside)
         
         mainMenuBtn.addAction(UIAction(handler: { [weak self] _ in
             guard let self else { return }
-            mainMenuBtn.animatePressing {
+            mainMenuBtn.buttonPressed {
                 self.removeSettingsView(isDismission: true)
             }
         }), for: .touchUpInside)
         
         soundBtn.addAction(UIAction(handler: { [weak self] _ in
             guard let self else { return }
-            soundBtn.isSelected.toggle()
+            soundBtn.buttonPressed {
+                self.soundBtn.isSelected.toggle()
+            }
         }), for: .touchUpInside)
         
         vibrationBtn.addAction(UIAction(handler: { [weak self] _ in
             guard let self else { return }
-            vibrationBtn.isSelected.toggle()
+            vibrationBtn.buttonPressed {
+                Vibration.isEnabled.toggle()
+                self.vibrationBtn.isSelected.toggle()
+            }
         }), for: .touchUpInside)
     }
     

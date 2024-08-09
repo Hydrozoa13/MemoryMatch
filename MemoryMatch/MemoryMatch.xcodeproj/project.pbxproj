@@ -17,6 +17,7 @@
 		D14C245F2C61F69F002672D6 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14C245E2C61F69F002672D6 /* UIViewExt.swift */; };
 		D14C24622C61F744002672D6 /* NavigationBarRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14C24612C61F744002672D6 /* NavigationBarRoot.swift */; };
 		D14C24642C61F762002672D6 /* NavigationBarRoot+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14C24632C61F762002672D6 /* NavigationBarRoot+Presenter.swift */; };
+		D152C3E12C6652D300F4AA35 /* Vibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D152C3E02C6652D200F4AA35 /* Vibration.swift */; };
 		D16A1EB02C6269D1003F3812 /* MainScreen+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EAF2C6269D1003F3812 /* MainScreen+Presenter.swift */; };
 		D16A1EB22C6269DA003F3812 /* MainScreen+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EB12C6269DA003F3812 /* MainScreen+View.swift */; };
 		D16A1EB42C6269E0003F3812 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A1EB32C6269E0003F3812 /* MainScreenView.swift */; };
@@ -52,6 +53,7 @@
 		D14C245E2C61F69F002672D6 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		D14C24612C61F744002672D6 /* NavigationBarRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarRoot.swift; sourceTree = "<group>"; };
 		D14C24632C61F762002672D6 /* NavigationBarRoot+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationBarRoot+Presenter.swift"; sourceTree = "<group>"; };
+		D152C3E02C6652D200F4AA35 /* Vibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibration.swift; sourceTree = "<group>"; };
 		D16A1EAF2C6269D1003F3812 /* MainScreen+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainScreen+Presenter.swift"; sourceTree = "<group>"; };
 		D16A1EB12C6269DA003F3812 /* MainScreen+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainScreen+View.swift"; sourceTree = "<group>"; };
 		D16A1EB32C6269E0003F3812 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 		D14C245A2C61F605002672D6 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D152C3DF2C6652B500F4AA35 /* Vibration */,
 				D16A1EE32C64AE93003F3812 /* CommonViews */,
 				D16A1EC32C627A12003F3812 /* UserDefKeys */,
 				D14C245B2C61F60B002672D6 /* Extensions */,
@@ -182,6 +185,14 @@
 				D14C24632C61F762002672D6 /* NavigationBarRoot+Presenter.swift */,
 			);
 			path = Root;
+			sourceTree = "<group>";
+		};
+		D152C3DF2C6652B500F4AA35 /* Vibration */ = {
+			isa = PBXGroup;
+			children = (
+				D152C3E02C6652D200F4AA35 /* Vibration.swift */,
+			);
+			path = Vibration;
 			sourceTree = "<group>";
 		};
 		D16A1EAE2C6269B9003F3812 /* MainScreen */ = {
@@ -363,6 +374,7 @@
 				D14C24572C61F5AE002672D6 /* LoadingScreen+View.swift in Sources */,
 				D16A1EB72C62717E003F3812 /* GameScreen+Presenter.swift in Sources */,
 				D16A1EC22C627866003F3812 /* NotificationsScreenView.swift in Sources */,
+				D152C3E12C6652D300F4AA35 /* Vibration.swift in Sources */,
 				D16A1ED92C63AA9F003F3812 /* CollectionView.swift in Sources */,
 				D14C24592C61F5B5002672D6 /* LoadingScreenView.swift in Sources */,
 			);
