@@ -10,5 +10,5 @@ import UIKit
 struct LoadingScreen { }
 
 protocol LoadingScreenView: ViewDelegate {
-    func startAnimatingImageView()
+    func animateFire()
 }

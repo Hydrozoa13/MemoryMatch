@@ -50,7 +50,56 @@ extension LoadingScreen {
         
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
-            SoundManager.playSound(type: .coins)
+            animateViews()
+        }
+        
+        // MARK: - Private functions
+        
+        private func animateViews() {
+            
+            UIView.animate(withDuration: 1.8) {[weak self] in
+                guard let self else { return }
+                cherries.bounds.size.width *= 5
+                cherries.bounds.size.height *= 5
+                cherries.isHidden = false
+            }
+            
+            UIView.animate(withDuration: 0.5) {[weak self] in
+                guard let self else { return }
+                grapes.center.x -= grapes.frame.width
+                grapes.center.y -= grapes.frame.height
+                grapes.isHidden = false
+            }
+            
+            UIView.animate(withDuration: 0.8) {[weak self] in
+                guard let self else { return }
+                lemon.center.x += lemon.frame.width
+                lemon.center.y += lemon.frame.height
+                lemon.bounds.size.width *= 0.5
+                lemon.bounds.size.height *= 0.5
+                lemon.isHidden = false
+            }
+            
+            UIView.animate(withDuration: 1.2) {[weak self] in
+                guard let self else { return }
+                orange.bounds.size.width *= 2
+                orange.bounds.size.height *= 2
+                orange.isHidden = false
+            }
+            
+            UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut) { [weak self] in
+                guard let self else { return }
+                stars.center.y += stars.frame.height
+                stars.isHidden = false
+            } completion: { _ in
+                SoundManager.playSound(type: .coins)
+            }
+            
+            UIView.animate(withDuration: 1, delay: 1) { [weak self] in
+                guard let self else { return }
+                money.center.y -= money.frame.height
+                money.isHidden = false
+            }
         }
         
         // MARK: - Methods
@@ -77,6 +126,24 @@ extension LoadingScreen {
             loadingLabel.text = "Loading..."
             loadingLabel.font = UIFont(name: "muller", size: 57.51)
             loadingLabel.textColor = .white
+            
+            money.center.y += money.frame.height
+            money.isHidden = true
+            
+            stars.center.y -= stars.frame.height
+            stars.isHidden = true
+            
+            cherries.isHidden = true
+            
+            grapes.center.x += grapes.frame.width
+            grapes.center.y += grapes.frame.height
+            grapes.isHidden = true
+            
+            lemon.center.x -= lemon.frame.width
+            lemon.center.y -= lemon.frame.height
+            lemon.isHidden = true
+            
+            orange.isHidden = true
         }
         
         private func layoutSubviews() {
@@ -133,7 +200,7 @@ extension LoadingScreen {
 
 extension LoadingScreen.View: LoadingScreenView {
     
-    func startAnimatingImageView() {
+    func animateFire() {
         let distance: CGFloat = 40
         let startYPos = fire.center.y
         
@@ -146,7 +213,7 @@ extension LoadingScreen.View: LoadingScreenView {
             UIView.animate(withDuration: 1, animations: {
                 self.fire.center.y += distance
             }) { _ in
-                self.startAnimatingImageView()
+                self.animateFire()
             }
         }
     }

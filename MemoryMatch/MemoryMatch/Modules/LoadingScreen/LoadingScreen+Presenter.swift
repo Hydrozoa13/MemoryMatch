@@ -22,7 +22,7 @@ extension LoadingScreen {
         // MARK: - Methods
         
         func navigateToMainScreen() {
-            view?.startAnimatingImageView()
+            view?.animateFire()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [weak self] in
                 guard let self else { return }
